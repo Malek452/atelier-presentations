@@ -4,6 +4,8 @@ A reusable presentation starter extracted from [Atelier Fonctions](https://githu
 
 [Live example presentation](https://malek452.github.io/atelier-presentations/) · [Version française](README.fr.md) · [Authoring guide](docs/AUTHORING.md) · [Animation recipes](docs/ANIMATIONS.md) · [Instructions for coding assistants](AGENTS.md)
 
+![The presentation board showing a French sign table and its explanation](docs/preview.jpg)
+
 ## Start your own presentation
 
 1. Choose **Use this template → Create a new repository** on GitHub, or clone/download this repository.
