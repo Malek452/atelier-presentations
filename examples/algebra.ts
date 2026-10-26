@@ -1,6 +1,6 @@
-import type { Exercise } from '../types';
-import { expandBinomial } from './binomial';
-import { quadraticSteps } from './quadratic';
+import type { Exercise } from '../src/types';
+import { expandBinomial } from '../src/content/binomial';
+import { quadraticSteps } from '../src/content/quadratic';
 const t = String.raw;
 export default {
   id: 2,

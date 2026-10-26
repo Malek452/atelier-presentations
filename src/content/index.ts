@@ -1,8 +1,8 @@
-import powers from './powers';
-import algebra from './algebra';
-import signs from './signs';
-import circle from './circle';
-import concepts from './concepts';
+import powers from '../../examples/powers';
+import algebra from '../../examples/algebra';
+import signs from '../../examples/signs';
+import circle from '../../examples/circle';
+import concepts from '../../examples/concepts';
 // @new-lesson-import
 import { definePresentation } from './define';
 

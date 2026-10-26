@@ -1,5 +1,5 @@
-import type { Exercise } from '../types';
-import { textStep } from './define';
+import type { Exercise } from '../src/types';
+import { textStep } from '../src/content/define';
 export default {
   id: 5,
   title: 'Présenter une notion',

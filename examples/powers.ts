@@ -1,4 +1,4 @@
-import type { Exercise } from '../types';
+import type { Exercise } from '../src/types';
 export default {
   id: 1,
   title: 'Puissances et exposants',

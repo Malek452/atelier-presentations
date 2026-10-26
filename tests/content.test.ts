@@ -1,14 +1,15 @@
 import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import katex from 'katex';
-import { exercises, activities } from '../src/content';
+import { activities } from '../src/content';
+import { exercises } from './fixtures';
 import { definePresentation } from '../src/content/define';
 import { readRoute } from '../src/route';
 import { focusParts } from '../src/components/focus';
 import { expandBinomial } from '../src/content/binomial';
 import { quadraticSteps } from '../src/content/quadratic';
 
-it('all examples contain renderable TeX and exact highlight references', () => {
+it('all active lessons contain renderable TeX and exact highlight references', () => {
   for (const activity of activities)
     for (const [i, step] of activity.steps.entries()) {
       katex.renderToString(step.tex, { throwOnError: true, strict: 'error' });

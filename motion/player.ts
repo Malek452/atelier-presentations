@@ -1,3 +1,4 @@
+import { theme } from '../src/theme';
 import { Player, Stage, Vector2 } from '@motion-canvas/core';
 import project from './project?project';
 import type { Activity } from '../src/types';
@@ -17,7 +18,7 @@ export function mount(
   onError: (message: string) => void,
 ): Controller {
   const stage = new Stage();
-  stage.configure({ size: new Vector2(1000, 400), resolutionScale: 1, background: '#182923' });
+  stage.configure({ size: new Vector2(1000, 400), resolutionScale: 1, background: theme.board });
   stage.finalBuffer.setAttribute('aria-hidden', 'true');
   host.replaceChildren(stage.finalBuffer);
   const player = new Player(

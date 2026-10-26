@@ -10,7 +10,7 @@ npm run new:lesson -- fractions "Fractions"
 
 The command adds one typed content file and its import/entry in `src/content/index.ts`. It refuses existing files and duplicate IDs. Keep the two `@new-lesson-*` comments in that registry if you want the command to keep working. Replace the generated equation example with your lesson.
 
-To remove the starter lessons, remove their imports and array entries from `src/content/index.ts`. Keep at least one section/activity. IDs need not be consecutive.
+To remove the starter lessons from the presentation, remove their imports and array entries from `src/content/index.ts`. Keep at least one section/activity. IDs need not be consecutive. Leave `examples/` in the repository: it supplies reference recipes and independent regression fixtures, but unregistered examples are not bundled into the student app. Put your own lessons in `src/content/`.
 
 ## Content contract
 
@@ -64,7 +64,7 @@ const steps = [
 
 ## Sign tables
 
-`src/content/signs.ts` is a complete worked example. Define sorted finite critical values and one row per factor, then the final expression. Each row needs one sign per open interval (`points.length + 1`) and one marker per critical value (`''`, `'0'`, or `'bar'`).
+`examples/signs.ts` is a complete worked example. Define sorted finite critical values and one row per factor, then the final expression. Each row needs one sign per open interval (`points.length + 1`) and one marker per critical value (`''`, `'0'`, or `'bar'`).
 
 Call `signTableSteps(model, explanations, selectedIntervals, selectedPoints, reading)` to reveal the header, each justified row, and the solution selection. Interval and point indices start at zero. A selected endpoint must not be forbidden on the final row. Write the final interval set explicitly and check the endpoint brackets yourself.
 

@@ -15,7 +15,7 @@
     "preview": "vite preview --host 127.0.0.1",
     "motion": "vite --config motion/vite.config.ts",
     "docs": "node scripts/export-docs.mjs",
-    "format": "prettier --write src motion tests scripts vite.config.ts",
+    "format": "prettier --write src examples motion tests scripts vite.config.ts presentation.config.ts",
     "validate": "npm test && npm run build",
     "new:lesson": "node scripts/new-lesson.mjs"
   },

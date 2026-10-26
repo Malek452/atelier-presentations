@@ -7,6 +7,7 @@ This is a reusable **presentation** repository. Read `README.md`, `docs/AUTHORIN
 - One main board, one current step and its matching justification. Keep navigation compact. Do not add promotional copy, dashboards, student answer fields, grading or accounts unless requested.
 - Preserve the existing theme, keyboard/swipe navigation, reduced motion, replay and speed controls. Prefer `src/theme.ts` for palette changes.
 - Edit `src/content/`, `presentation.config.ts` and the content registry for a new presentation. Reuse the engine before changing it.
+- Keep `examples/` as reusable recipes and independent test fixtures. Remove its imports from the active registry to replace the demo; unregistered examples are not shipped to the student app. Generic content/geometry checks run on the active registry, while sample mathematical/UI regressions use those fixtures.
 - `visual` is descriptive metadata; it does not magically create a diagram. Use an implemented `circle`, `table`, `diagram` or a deliberate new renderer.
 
 ## Mathematical and pedagogical contract

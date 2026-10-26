@@ -2,7 +2,7 @@
 
 A reusable presentation starter extracted from [Atelier Fonctions](https://github.com/Malek452/atelier-fonctions). It keeps the dark green board, readable mathematics, and deliberate animations from that project. Students move through an explanation; there are no accounts, quizzes, answer fields, or grading services.
 
-[Version française](README.fr.md) · [Authoring guide](docs/AUTHORING.md) · [Animation recipes](docs/ANIMATIONS.md) · [Instructions for coding assistants](AGENTS.md)
+[Live example presentation](https://malek452.github.io/atelier-presentations/) · [Version française](README.fr.md) · [Authoring guide](docs/AUTHORING.md) · [Animation recipes](docs/ANIMATIONS.md) · [Instructions for coding assistants](AGENTS.md)
 
 ## Start your own presentation
 
@@ -31,6 +31,7 @@ This creates and registers `src/content/my-lesson.ts`, with a small working equa
 | `src/theme.ts` | Board and mathematical role colors, shared by the interface and animation engine |
 | `src/content/index.ts` | Presentation order and registered lesson modules |
 | `src/content/*.ts` | Statements, reasoning, justifications, highlights and animation cues |
+| `examples/*.ts` | Bundled working recipes; keep them as references when replacing the active deck |
 | `src/types.ts` | Typed content contract |
 | `AGENTS.md` | Editing instructions for LLMs and coding agents |
 

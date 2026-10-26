@@ -67,7 +67,7 @@ function schedule(path) {
     void rebuild();
   }, 350);
 }
-for (const path of ['src/content', 'motion'])
+for (const path of ['src/content', 'examples', 'motion'])
   watchers.push(watch(path, { recursive: true }, (_, file) => schedule(file)));
 for (const path of [
   'presentation.config.ts',

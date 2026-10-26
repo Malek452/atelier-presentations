@@ -2,7 +2,7 @@
 
 Keep the expression on one board. Highlight the operands before moving them. Preserve unrelated terms. Establish a new `phase` and use `statement: true` when introducing a new claim, rather than morphing unrelated formulas into each other.
 
-The complete executable recipes are `powers.ts`, `algebra.ts`, `signs.ts` and `circle.ts` in `src/content/`. The fragments below describe cues on a current step; its `fromFocus` refers to the immediately preceding step.
+The complete executable recipes are `powers.ts`, `algebra.ts`, `signs.ts` and `circle.ts` in `examples/`. The fragments below describe cues on a current step; its `fromFocus` refers to the immediately preceding step.
 
 ## Common-base powers
 

@@ -1,5 +1,5 @@
-import type { Exercise, SignTableModel } from '../types';
-import { signTableSteps } from './sign-tables';
+import type { Exercise, SignTableModel } from '../src/types';
+import { signTableSteps } from '../src/content/sign-tables';
 const t = String.raw;
 const model: SignTableModel = {
   id: 'quotient-signs',
@@ -34,10 +34,17 @@ export default {
       visual: 'signs',
       steps: [
         {
+          title: 'Lire l’inéquation',
+          tex: t`\frac{x-1}{x+2}\ge0`,
+          why: 'On cherche tous les réels x pour lesquels ce quotient existe et est positif ou nul. On commence par exclure les valeurs qui annulent son dénominateur.',
+          phase: 'Énoncé',
+        },
+        {
           title: 'Déterminer la condition d’existence',
           tex: t`x\ne-2`,
           why: 'Le dénominateur x + 2 doit être non nul. On conserve x ≠ −2 pendant toute la résolution.',
-          phase: 'Énoncé',
+          phase: 'Condition d’existence',
+          statement: true,
         },
         {
           title: 'Repérer les deux valeurs critiques',

@@ -3,30 +3,30 @@ import { it, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from '../src/App';
-import { getActivity, exercises } from '../src/content';
+import { getActivity, exercises } from './fixtures';
+import { ui } from '../src/ui';
 import { ProseSlide } from '../src/components/ProseSlide';
 
 beforeEach(() => {
   window.location.hash = '';
 });
 const jump = (i: number) =>
-  fireEvent.change(screen.getByRole('combobox', { name: 'Aller à une étape' }), {
+  fireEvent.change(screen.getByRole('combobox', { name: ui.chooseStep }), {
     target: { value: String(i) },
   });
 
 it('opens on one presentation board without answer fields', () => {
-  const { container } = render(<App />);
+  const { container } = render(<App sections={exercises} />);
   assert.equal(container.querySelectorAll('.reading-board').length, 1);
   assert.equal(screen.queryByRole('textbox'), null);
   assert.equal(
-    (screen.getByRole('combobox', { name: 'Choisir un chapitre' }) as HTMLSelectElement).options
-      .length,
+    (screen.getByRole('combobox', { name: ui.chooseSection }) as HTMLSelectElement).options.length,
     exercises.length,
   );
 });
 it('direct links, jumps and backward navigation retain the matching explanation', () => {
   window.location.hash = '#activity/distributivity';
-  const { container } = render(<App />);
+  const { container } = render(<App sections={exercises} />);
   const activity = getActivity('distributivity')!;
   jump(4);
   assert.equal(
@@ -38,7 +38,7 @@ it('direct links, jumps and backward navigation retain the matching explanation'
     container.querySelector('.reading-explanation p')!.textContent,
     activity.steps[3].why,
   );
-  fireEvent.keyDown(screen.getByRole('combobox', { name: 'Aller à une étape' }), {
+  fireEvent.keyDown(screen.getByRole('combobox', { name: ui.chooseStep }), {
     key: 'ArrowRight',
   });
   assert.equal(
@@ -47,13 +47,13 @@ it('direct links, jumps and backward navigation retain the matching explanation'
   );
   jump(activity.steps.length - 1);
   assert.equal(
-    (screen.getByRole('button', { name: 'Étape suivante' }) as HTMLButtonElement).disabled,
+    (screen.getByRole('button', { name: ui.nextStep }) as HTMLButtonElement).disabled,
     true,
   );
 });
 it('changing chapter writes a stable activity URL and resets the lesson', async () => {
-  render(<App />);
-  fireEvent.change(screen.getByRole('combobox', { name: 'Choisir un chapitre' }), {
+  render(<App sections={exercises} />);
+  fireEvent.change(screen.getByRole('combobox', { name: ui.chooseSection }), {
     target: { value: '5' },
   });
   await waitFor(() =>
@@ -64,7 +64,7 @@ it('changing chapter writes a stable activity URL and resets the lesson', async 
 });
 it('French sign tables reveal rows, render infinity and distinguish a pole from an included zero', () => {
   window.location.hash = '#activity/sign-table';
-  const { container } = render(<App />);
+  const { container } = render(<App sections={exercises} />);
   const a = getActivity('sign-table')!,
     first = a.steps.findIndex((s) => s.table);
   jump(first);
@@ -73,10 +73,10 @@ it('French sign tables reveal rows, render infinity and distinguish a pole from 
   jump(first + 1);
   assert.ok(screen.getByRole('table').querySelectorAll('tbody td .math').length > 0);
   jump(a.steps.findIndex((s) => s.table?.selectedIntervals));
-  assert.ok(screen.getByRole('img', { name: 'valeur interdite' }));
+  assert.ok(screen.getByRole('img', { name: ui.forbidden }));
   assert.equal(container.querySelectorAll('.sign-selected').length, 3);
   assert.equal(container.querySelectorAll('.sign-selected .sign-forbidden').length, 0);
-  const region = screen.getByRole('region', { name: /défilement horizontal/ });
+  const region = screen.getByRole('region', { name: ui.tableRegion });
   Object.defineProperty(region, 'scrollWidth', { value: 900 });
   Object.defineProperty(region, 'clientWidth', { value: 300 });
   const before = container.querySelector('.reading-explanation')!.textContent;
@@ -84,7 +84,7 @@ it('French sign tables reveal rows, render infinity and distinguish a pole from 
   assert.equal(container.querySelector('.reading-explanation')!.textContent, before);
 });
 it('deliberate horizontal swipes navigate but vertical scrolling does not', () => {
-  const { container } = render(<App />),
+  const { container } = render(<App sections={exercises} />),
     surface = container.querySelector('.slide-surface')!;
   const finger = (x: number, y: number) => ({ identifier: 1, clientX: x, clientY: y });
   const start = container.querySelector('h1')!.textContent;

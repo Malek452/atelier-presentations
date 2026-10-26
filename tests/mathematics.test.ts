@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 // Independent symbolic checks are test-only. The student UI has no answer validator.
 // @ts-expect-error Nerdamer does not ship declarations for this entry.
 import nerdamer from 'nerdamer/all.js';
-import { getActivity } from '../src/content';
+import { getActivity } from './fixtures';
 
 // Nerdamer needs command separators and explicit fraction groups, even though
 // MathJax and KaTeX also accept the shorter equivalent notation.

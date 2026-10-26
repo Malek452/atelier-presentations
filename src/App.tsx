@@ -3,9 +3,11 @@ import { ui } from './ui';
 import { readRoute } from './route';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Maximize, Minimize, Waves } from 'lucide-react';
-import { exercises } from './content';
+import { exercises as defaultPresentation } from './content';
+import type { Exercise } from './types';
 import { Lesson } from './components/Lesson';
-export default function App() {
+export default function App({ sections = defaultPresentation }: { sections?: Exercise[] }) {
+  const exercises = sections;
   const [route, setRoute] = useState(() => readRoute(exercises, window.location.hash)),
     [full, setFull] = useState(false),
     [fullError, setFullError] = useState('');

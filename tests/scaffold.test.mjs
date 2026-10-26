@@ -9,6 +9,7 @@ it('the lesson command registers a usable file and refuses to overwrite it', asy
   const directory = await mkdtemp(resolve('.cache/scaffold-test-'));
   try {
     await cp('src', join(directory, 'src'), { recursive: true });
+    await cp('examples', join(directory, 'examples'), { recursive: true });
     await cp('presentation.config.ts', join(directory, 'presentation.config.ts'));
     const script = resolve('scripts/new-lesson.mjs');
     const run = () =>
