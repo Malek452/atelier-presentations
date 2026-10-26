@@ -11,7 +11,7 @@ The deliverable is the complete **`dist/` directory** produced by `npm run build
 
 The workflow needs the built-in `GITHUB_TOKEN` only; no personal token or repository secret is required. Public repositories can use the ordinary free Pages offering. Repository or organization policies may impose an environment approval; follow the policy shown by GitHub.
 
-The provided CI workflow runs on pushes/PRs. This repository publishes every `main` push after validation. The deployment workflow also allows manual dispatch. Its triggers in `.github/workflows/deploy.yml` are:
+The provided CI workflow runs on pushes/PRs. Deployment is deliberately manual so that a freshly copied template can pass CI before Pages is configured. To publish every `main` push after enabling Pages, add a `push` trigger to `.github/workflows/deploy.yml`:
 
 ```yaml
 on:

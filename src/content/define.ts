@@ -37,17 +37,13 @@ export function definePresentation(sections: Exercise[]): Exercise[] {
           Boolean,
         );
         if (transforms.length > 1) fail(at + ': only one semantic operation per step.');
-        const surfaces = [step.table, step.circle, step.diagram, step.prose, step.plot].filter(
-          Boolean,
-        );
+        const surfaces = [step.table, step.circle, step.diagram, step.prose].filter(Boolean);
         if (surfaces.length > 1 || (surfaces.length && transforms.length))
           fail(at + ': only one presentation surface/operation per step.');
         if (i === 0 && (transforms.length || step.fromFocus))
           fail(at + ': a source expression is required before a transformation.');
         if (step.prose && (!step.prose.length || step.prose.some((p) => !p.trim())))
           fail(at + ': prose needs nonempty paragraphs.');
-        if (step.plot && (!['production', 'bacteria'].includes(step.plot) || !step.statement))
-          fail(at + ': a reviewed plot requires a known model and statement: true.');
         for (const n of [step.focusOccurrence, step.fromFocusOccurrence])
           if (n !== undefined && (!Number.isInteger(n) || n < 1))
             fail(at + ': occurrences are one-based positive integers.');

@@ -5,7 +5,6 @@ import { MathView } from './Math';
 import { highlightedTex } from './focus';
 import { SignTable } from './SignTable';
 import { ProseSlide } from './ProseSlide';
-import { ModelPlot } from './ModelPlot';
 import { ui } from '../ui';
 declare const __MOTION_PLAYER_URL__: string;
 export function Animation({
@@ -37,14 +36,13 @@ export function Animation({
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
   const table = activity.steps[step].table;
   const prose = activity.steps[step].prose;
-  const plot = activity.steps[step].plot;
   useEffect(() => {
-    onAvailable(!!table || !!prose || !!plot || reduced || state !== 'loading');
-  }, [table, prose, plot, reduced, state, onAvailable]);
+    onAvailable(!!table || !!prose || reduced || state !== 'loading');
+  }, [table, prose, reduced, state, onAvailable]);
   useEffect(() => {
     let cancelled = false;
     setState('loading');
-    if (reduced || activity.steps.every((s) => s.prose || s.plot || s.table)) return;
+    if (reduced || activity.steps.every((s) => s.prose)) return;
     const playerUrl =
       typeof __MOTION_PLAYER_URL__ === 'string' ? __MOTION_PLAYER_URL__ : 'animations/player.js';
     const url = new URL(playerUrl, document.baseURI).href;
@@ -80,23 +78,23 @@ export function Animation({
     controller.current?.pause();
   }, [pauseSignal]);
   useEffect(() => {
-    pendingReplay.current = animate && replay > 0 && !reduced && !table && !prose && !plot;
-    if (table || prose || plot) controller.current?.pause();
+    pendingReplay.current = animate && replay > 0 && !reduced && !table && !prose;
+    if (table || prose) controller.current?.pause();
     else if (pendingReplay.current) controller.current?.replay(step, liveSpeed.current);
     else controller.current?.seek(step);
-  }, [step, replay, animate, reduced, table, prose, plot]);
+  }, [step, replay, animate, reduced, table, prose]);
   useEffect(() => {
     controller.current?.setSpeed(speed);
   }, [speed]);
   return (
     <div
-      className={'animation' + (table || plot ? ' has-table' : '')}
+      className={'animation' + (table ? ' has-table' : '')}
       aria-label={ui.visual}
-      data-playback={animate && !reduced && !plot ? 'animate' : 'settled'}
+      data-playback={animate && !reduced ? 'animate' : 'settled'}
     >
       {!reduced && (
         <div
-          hidden={!!table || !!prose || !!plot}
+          hidden={!!table || !!prose}
           ref={host}
           className={'canvas-host ' + (state === 'ready' ? 'is-ready' : '')}
         />
@@ -110,7 +108,6 @@ export function Animation({
           pauseSignal={pauseSignal}
         />
       )}
-      {plot && <ModelPlot kind={plot} />}
       {table && (
         <SignTable
           key={`${step}-${replay}`}
@@ -120,13 +117,13 @@ export function Animation({
           pauseSignal={pauseSignal}
         />
       )}
-      {!table && !prose && !plot && (reduced || state !== 'ready') && (
+      {!table && !prose && (reduced || state !== 'ready') && (
         <div className="animation-fallback">
           <MathView display tex={highlightedTex(activity.steps[step])} />
           <p>{state === 'error' ? ui.animationError : reduced ? '' : ui.loading}</p>
         </div>
       )}
-      {!table && !prose && !plot && state === 'ready' && !reduced && (
+      {!table && !prose && state === 'ready' && !reduced && (
         <div className="sr-only">
           <MathView display tex={activity.steps[step].tex} />
         </div>

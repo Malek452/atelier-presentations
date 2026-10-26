@@ -70,12 +70,6 @@ Call `signTableSteps(model, explanations, selectedIntervals, selectedPoints, rea
 
 The model is authored data: no sign inference, polynomial solver or inequality prover runs at presentation time. Negative and positive infinity are rendered as `\infty`, and never inserted as finite critical points.
 
-## Model graphs
-
-Use `plot: 'production'` or `plot: 'bacteria'` with `statement: true` and a named `phase` for the reviewed TD1 diagrams. They occupy the same board as the equations and remain static during replay and reduced motion. Do not combine a plot with prose, another diagram, or a semantic algebra operation. Keep a meaningful `tex` expression for exports and explain the graph in `why`.
-
-These are specific models, not a general graphing API: production uses the normalized ordinate `N(t)/r` with a pause on `[3,5]`; bacteria uses `100 × 3^(t/3)` on `[0,20]` and the 50,000 threshold. Changing the exercise parameters requires updating `src/model-plots.ts`, its renderer and the mathematical checks. Each SVG contains a full accessible description. The HTML handout includes the graph; Markdown includes its textual description.
-
 ## Theme, language and sharing
 
 Edit `src/theme.ts` to change colors; use consistent roles for an active term, a second operand and a retained base. Check contrast on both the board and controls. Layout styles are in `src/styles.css`.

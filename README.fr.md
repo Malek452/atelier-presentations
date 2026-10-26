@@ -2,18 +2,7 @@
 
 Un modèle réutilisable issu d’[Atelier Fonctions](https://github.com/Malek452/atelier-fonctions) : un tableau vert sombre, des formules lisibles et des animations qui expliquent chaque transformation. L’étudiant consulte une présentation pas à pas, sans compte ni saisie de réponses.
 
-[Présentation MSN en ligne](https://malek452.github.io/atelier-presentations/) · [English](README.md) · [Guide de rédaction](docs/AUTHORING.md) · [Recettes d’animation](docs/ANIMATIONS.md)
-
-## Parcours MSN : modèles linéaires et exponentiels
-
-La présentation active s’appuie sur le corrigé fourni `TD1-MSN-corrige-complet.tex`, exercices 2 et 5. Elle distingue les données des hypothèses et conserve les calculs expliqués pas à pas.
-
-- [Méthode générale](https://malek452.github.io/atelier-presentations/#activity/choisir-modele) : reconnaître le modèle, déterminer ses paramètres et résoudre une question de quantité ou de date.
-- [Exercice 2](https://malek452.github.io/atelier-presentations/#activity/ex2-reperes) : cadence inconnue `r`, pause, fonction affine par morceaux et total `9r` à 18 h.
-- [Exercice 5](https://malek452.github.io/atelier-presentations/#activity/ex5-modele) : `N(t) = 100 × 3^(t/3)`, effectifs après 15 h et 20 h, seuil de 50 000 et limite du modèle continu.
-- [Support imprimable](https://malek452.github.io/atelier-presentations/handout/) : toutes les étapes, justifications et graphiques.
-
-Chaque push sur `main` lance la validation puis le déploiement GitHub Pages. Les exemples du modèle restent disponibles dans `examples/`, hors de la présentation active.
+[Présentation de démonstration](https://malek452.github.io/atelier-presentations/) · [English](README.md) · [Guide de rédaction](docs/AUTHORING.md) · [Recettes d’animation](docs/ANIMATIONS.md)
 
 ## Créer une présentation
 

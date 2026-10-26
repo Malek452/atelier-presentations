@@ -8,12 +8,6 @@ import { readRoute } from '../src/route';
 import { focusParts } from '../src/components/focus';
 import { expandBinomial } from '../src/content/binomial';
 import { quadraticSteps } from '../src/content/quadratic';
-import {
-  bacteriaPopulation,
-  bacteriaThresholdTime,
-  modelPlotPoints,
-  productionRatio,
-} from '../src/model-plots';
 
 it('all active lessons contain renderable TeX and exact highlight references', () => {
   for (const activity of activities)
@@ -80,35 +74,4 @@ it('restricted authoring helpers reject unsupported cases instead of silently pr
   assert.throws(() => expandBinomial((x) => x, 2, -2), /supports/);
   assert.throws(() => quadraticSteps({ a: 0, b: 1, c: 1, roots: ['0', '1'] }), /requires/);
   assert.throws(() => quadraticSteps({ a: 1, b: 0, c: 1, roots: ['0', '1'] }), /requires/);
-});
-
-it('model plots preserve the pause, period multiplier, endpoints and threshold', () => {
-  assert.deepEqual(modelPlotPoints('production'), [
-    [0, 0],
-    [3, 3],
-    [5, 3],
-    [11, 9],
-  ]);
-  assert.equal(productionRatio(4), 3);
-  for (const t of [0, 1, 6, 15])
-    assert.ok(Math.abs(bacteriaPopulation(t + 3) / bacteriaPopulation(t) - 3) < 1e-12);
-  const curve = modelPlotPoints('bacteria');
-  assert.deepEqual(curve[0], [0, 100]);
-  assert.equal(curve.at(-1)![0], 20);
-  assert.equal(Math.round(curve.at(-1)![1]), 151638);
-  assert.ok(Math.abs(bacteriaPopulation(bacteriaThresholdTime) - 50000) < 1e-8);
-  assert.ok(curve.every(([t, n], i) => i === 0 || (t > curve[i - 1][0] && n > curve[i - 1][1])));
-});
-
-it('plot steps require a statement boundary and cannot overlay another surface', () => {
-  const deck = structuredClone(exercises);
-  const step = deck[0].activities[0].steps[0];
-  step.plot = 'production';
-  step.statement = true;
-  assert.doesNotThrow(() => definePresentation(deck));
-  step.statement = false;
-  assert.throws(() => definePresentation(deck), /reviewed plot/);
-  step.statement = true;
-  step.prose = ['Une explication'];
-  assert.throws(() => definePresentation(deck), /one presentation surface/);
 });
