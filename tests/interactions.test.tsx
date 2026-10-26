@@ -6,6 +6,9 @@ import App from '../src/App';
 import { getActivity, exercises } from './fixtures';
 import { ui } from '../src/ui';
 import { ProseSlide } from '../src/components/ProseSlide';
+import { ModelPlot } from '../src/components/ModelPlot';
+import { Lesson } from '../src/components/Lesson';
+import type { Activity } from '../src/types';
 
 beforeEach(() => {
   window.location.hash = '';
@@ -109,4 +112,51 @@ it('text slides render text safely and pause their movement', () => {
     (container.querySelector('.prose-slide') as HTMLElement).style.animationPlayState,
     'paused',
   );
+});
+
+it('model graphs have a named accessible description and retain the threshold annotation', () => {
+  const { container, rerender } = render(<ModelPlot kind="production" />);
+  assert.ok(screen.getByRole('img', { name: /Production cumulée et pause/ }));
+  assert.match(container.querySelector('desc')!.textContent!, /plateau entre t = 3 et t = 5/);
+  rerender(<ModelPlot kind="bacteria" />);
+  assert.ok(screen.getByRole('img', { name: /Croissance bactérienne et seuil/ }));
+  assert.ok(screen.getByText('50 000 à ≈ 16,97 h'));
+  assert.equal(container.querySelectorAll('[data-model-curve]').length, 1);
+});
+
+it('jumping through graph steps preserves the explanation and returns to the formula', () => {
+  const activity: Activity = {
+    id: 'plot-navigation',
+    label: 'Courbe',
+    prompt: 'Tracer',
+    tex: 'N(0)=0',
+    result: 'N(11)=9r',
+    visual: 'algebra',
+    steps: [
+      { title: 'Départ', tex: 'N(0)=0', why: 'Le cumul commence à zéro.' },
+      {
+        title: 'Courbe de production',
+        tex: 'N(11)=9r',
+        why: 'La pause laisse le cumul constant.',
+        plot: 'production',
+        statement: true,
+      },
+      { title: 'Total', tex: 'N(11)=9r', why: 'Neuf heures de production.' },
+    ],
+  };
+  const { container } = render(<Lesson activity={activity} reduced />);
+  jump(1);
+  assert.ok(screen.getByRole('img', { name: /Production cumulée et pause/ }));
+  assert.equal(container.querySelector('.animation')!.getAttribute('data-playback'), 'settled');
+  assert.equal(
+    container.querySelector('.reading-explanation p')!.textContent,
+    activity.steps[1].why,
+  );
+  fireEvent.click(screen.getByRole('button', { name: ui.replay }));
+  assert.ok(screen.getByRole('img', { name: /Production cumulée et pause/ }));
+  jump(2);
+  assert.equal(screen.queryByRole('img'), null);
+  assert.ok(container.querySelector('.animation-fallback .katex'));
+  fireEvent.keyDown(document.body, { key: 'ArrowLeft' });
+  assert.ok(screen.getByRole('img', { name: /Production cumulée et pause/ }));
 });

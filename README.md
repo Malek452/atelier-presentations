@@ -2,9 +2,15 @@
 
 A reusable presentation starter extracted from [Atelier Fonctions](https://github.com/Malek452/atelier-fonctions). It keeps the dark green board, readable mathematics, and deliberate animations from that project. Students move through an explanation; there are no accounts, quizzes, answer fields, or grading services.
 
-[Live example presentation](https://malek452.github.io/atelier-presentations/) · [Version française](README.fr.md) · [Authoring guide](docs/AUTHORING.md) · [Animation recipes](docs/ANIMATIONS.md) · [Instructions for coding assistants](AGENTS.md)
+[Live MSN presentation](https://malek452.github.io/atelier-presentations/) · [Version française](README.fr.md) · [Authoring guide](docs/AUTHORING.md) · [Animation recipes](docs/ANIMATIONS.md) · [Instructions for coding assistants](AGENTS.md)
 
 ![The presentation board showing a French sign table and its explanation](docs/preview.jpg)
+
+## Current presentation: linear and exponential models
+
+The active French deck teaches a reusable modelling method and exercises 2 and 5 from the supplied `TD1-MSN-corrige-complet.tex`. It covers piecewise affine production with a pause, continuous exponential growth, evaluation, logarithmic threshold solving, explicit assumptions and accessible graphs. The original examples remain reusable fixtures in `examples/`.
+
+[Method](https://malek452.github.io/atelier-presentations/#activity/choisir-modele) · [Exercise 2](https://malek452.github.io/atelier-presentations/#activity/ex2-reperes) · [Exercise 5](https://malek452.github.io/atelier-presentations/#activity/ex5-modele) · [Printable handout](https://malek452.github.io/atelier-presentations/handout/)
 
 ## Start your own presentation
 
@@ -67,7 +73,7 @@ npm run validate
 
 Deploy **`dist/`** to a static host. [Deployment instructions](docs/DEPLOYMENT.md) cover GitHub Pages and Netlify. No backend, API key, paid correction service or runtime font CDN is required. The build includes a printable, searchable handout at `handout/` and `handout/handout.md`.
 
-GitHub CI runs tests and the production build on pushes and pull requests. A separate, manually triggered **Deploy to GitHub Pages** workflow publishes the presentation after Pages is enabled. The template does not automatically deploy each push.
+GitHub CI runs tests and the production build on pushes and pull requests. The **Deploy to GitHub Pages** workflow validates and publishes each push to `main`; it also supports manual dispatch. Pages is already enabled for this repository.
 
 ## Working with an LLM
 

@@ -1,17 +1,13 @@
-import powers from '../../examples/powers';
-import algebra from '../../examples/algebra';
-import signs from '../../examples/signs';
-import circle from '../../examples/circle';
-import concepts from '../../examples/concepts';
+import methodologie from './methodologie-modeles';
+import production from './production-lineaire';
+import croissance from './croissance-exponentielle';
 // @new-lesson-import
 import { definePresentation } from './define';
 
 export const exercises = definePresentation([
-  powers,
-  algebra,
-  signs,
-  circle,
-  concepts,
+  methodologie,
+  production,
+  croissance,
   // @new-lesson-entry
 ]);
 export const activities = exercises.flatMap((section) => section.activities);

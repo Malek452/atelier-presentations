@@ -39,7 +39,7 @@ export default makeScene2D(function* (view) {
     circleInstruction = null;
     diagramNodes.forEach((n) => n.remove());
     diagramNodes.length = 0;
-    formula.root.opacity(step.diagram || step.circle || step.prose ? 0 : 1);
+    formula.root.opacity(step.diagram || step.circle || step.prose || step.plot ? 0 : 1);
     if (step.diagram === 'fold') {
       diagramNodes.push(
         new Rect({
@@ -213,12 +213,12 @@ export default makeScene2D(function* (view) {
     }
     const source = sourcePoses(layouts[i - 1], equations.equations[steps[i].source]);
     const target = layouts[i];
-    if (previous.table || previous.diagram || previous.circle || previous.prose)
+    if (previous.table || previous.diagram || previous.circle || previous.prose || previous.plot)
       formula.show(target);
     else yield* formula.to(source, 0.25, 0);
-    if (s.table || s.prose) {
-      // The accessible HTML table occupies this same surface in the reader.
-      // Keep editor/export timeline slots deterministic without morphing tables.
+    if (s.table || s.prose || s.plot) {
+      // Accessible HTML/SVG content occupies this same surface in the reader.
+      // Keep timeline slots deterministic without morphing unrelated surfaces.
       formula.show(target);
     } else if (steps[i].semantic) {
       const distribution = steps[i].semantic === 'distribute';
@@ -226,7 +226,13 @@ export default makeScene2D(function* (view) {
       else yield* animatePower(view, formula, target, equations);
     } else if (steps[i].work) {
       yield* animateOperation(view, formula, target, steps[i], equations);
-    } else if (previous.table || previous.diagram || previous.circle || previous.prose) {
+    } else if (
+      previous.table ||
+      previous.diagram ||
+      previous.circle ||
+      previous.prose ||
+      previous.plot
+    ) {
       yield* formula.emphasize(0.7);
     } else if (steps[i].statement) {
       // A different statement changes the board smoothly as a whole. It is

@@ -3,19 +3,22 @@ import { mkdir, writeFile, copyFile, cp } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import katex from 'katex';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 await mkdir('.cache', { recursive: true });
 await build({
   stdin: {
     contents:
-      "export {exercises} from './src/content'; export {presentation} from './presentation.config';",
+      "export {exercises} from './src/content'; export {presentation} from './presentation.config'; export {ModelPlot} from './src/components/ModelPlot'; export {modelPlotDescriptions} from './src/model-plots';",
     resolveDir: process.cwd(),
   },
   outfile: '.cache/handout.mjs',
   bundle: true,
   format: 'esm',
   platform: 'node',
+  packages: 'external',
 });
-const { exercises, presentation } = await import(
+const { exercises, presentation, ModelPlot, modelPlotDescriptions } = await import(
   pathToFileURL(resolve('.cache/handout.mjs')).href + '?' + Date.now()
 );
 const escape = (s) =>
@@ -47,12 +50,18 @@ for (const section of exercises) {
       md +=
         `${i + 1}. **${step.title}**\n\n` +
         (step.prose ? step.prose.join('\n\n') : `$$${step.tex}$$`) +
+        (step.plot ? `\n\n${modelPlotDescriptions[step.plot]}` : '') +
         `\n\n${step.why}\n\n`;
       body +=
         `<div class="step"><h4>${i + 1}. ${escape(step.title)}</h4>` +
         (step.prose
           ? step.prose.map((p) => `<p>${escape(p)}</p>`).join('')
           : `<div class="formula">${math(step.tex)}</div>`) +
+        (step.plot
+          ? renderToStaticMarkup(createElement(ModelPlot, { kind: step.plot, print: true }), {
+              identifierPrefix: `${activity.id}-${i}-`,
+            })
+          : '') +
         `<p>${escape(step.why)}</p></div>`;
     }
     md += `$$${activity.result}$$\n\n`;

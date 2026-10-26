@@ -30,6 +30,8 @@ export interface Step {
   why: string;
   /** Plain-text explanation on the main board; does not accept HTML. */
   prose?: string[];
+  /** Reviewed model graph, shown as a separate static explanatory step. */
+  plot?: 'production' | 'bacteria';
   /** Named part of the reasoning, inherited until the next explicit phase. */
   phase?: string;
   /** Exact source fragment to highlight before the current transformation. */
