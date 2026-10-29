@@ -54,3 +54,12 @@ Les vérifications automatiques repèrent notamment les références d’animati
 Demander à l’assistant de lire `AGENTS.md`, puis lui fournir le document réel et le niveau des étudiants. Les [prompts proposés](docs/LLM-PROMPTS.md) expliquent comment adapter le contenu sans perdre la cohérence pédagogique des animations.
 
 Le moteur conserve React, TypeScript et Motion Canvas. Voir les [limites techniques](docs/ARCHITECTURE.md) et la [maintenance des dépendances](docs/MAINTENANCE.md). Licence MIT ; les droits sur les documents que vous ajoutez restent à vérifier séparément.
+
+## TD 3 : logarithmes, exponentielles et trigonométrie
+
+Une présentation complète et indépendante se trouve dans [`presentations/td3-fonctions`](presentations/td3-fonctions). Elle utilise une palette claire à fort contraste pour la projection.
+
+- [Présentation pour les étudiants](https://malek452.github.io/atelier-presentations/td3-fonctions/)
+- [Corrigé imprimable](https://malek452.github.io/atelier-presentations/td3-fonctions/handout/)
+
+Le workflow Pages valide et publie le modèle et le TD 3 dans deux chemins distincts.

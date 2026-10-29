@@ -1,6 +1,11 @@
 name: Deploy to GitHub Pages
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "presentations/td3-fonctions/**"
+      - ".github/workflows/deploy.yml"
 permissions:
   contents: read
   pages: write
@@ -17,8 +22,19 @@ jobs:
         with:
           node-version: 24
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            presentations/td3-fonctions/package-lock.json
       - run: npm ci
       - run: npm run validate
+      - name: Install TD3 dependencies
+        run: npm ci
+        working-directory: presentations/td3-fonctions
+      - name: Validate and build TD3
+        run: npm run validate
+        working-directory: presentations/td3-fonctions
+      - name: Add TD3 to the published site
+        run: cp -a presentations/td3-fonctions/dist dist/td3-fonctions
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
