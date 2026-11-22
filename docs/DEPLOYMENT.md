@@ -11,7 +11,18 @@ The deliverable is the complete **`dist/` directory** produced by `npm run build
 
 The workflow needs the built-in `GITHUB_TOKEN` only; no personal token or repository secret is required. Public repositories can use the ordinary free Pages offering. Repository or organization policies may impose an environment approval; follow the policy shown by GitHub.
 
-The provided CI workflow runs on pushes/PRs. The deployment workflow publishes both the model and TD3 when their source or build configuration changes on `main`; it also supports manual dispatch. For a freshly copied template, configure Pages before publishing. Remove the `push` trigger from `.github/workflows/deploy.yml` if you prefer manual publication only.
+The provided CI workflow runs on pushes/PRs. The deployment workflow publishes the model, TD3 and TD5 when their source or build configuration changes on `main`; it also supports manual dispatch. For a freshly copied template, configure Pages before publishing. Remove the `push` trigger from `.github/workflows/deploy.yml` if you prefer manual publication only.
+
+The workflow runs `npm ci` and `npm run validate` independently in the root, `presentations/td3-fonctions` and `presentations/td5-limites`, then combines their build outputs in the root `dist/` directory.
+
+| Content | Public URL |
+| --- | --- |
+| Presentation model | https://malek452.github.io/atelier-presentations/ |
+| TD3 | https://malek452.github.io/atelier-presentations/td3-fonctions/ |
+| TD5 | https://malek452.github.io/atelier-presentations/td5-limites/ |
+| TD5 printable correction | https://malek452.github.io/atelier-presentations/td5-limites/handout/ |
+
+These links require no account. Each presentation keeps its own assets, animation player and handout in its published subdirectory.
 
 Vite uses relative asset URLs (`base: './'`), so a project URL such as `https://USERNAME.github.io/REPOSITORY/` works without hard-coding a username. Activity navigation uses hashes; no SPA route rewrites are necessary.
 

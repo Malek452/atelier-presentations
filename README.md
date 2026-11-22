@@ -65,7 +65,16 @@ npm run validate
 
 Deploy **`dist/`** to a static host. [Deployment instructions](docs/DEPLOYMENT.md) cover GitHub Pages and Netlify. No backend, API key, paid correction service or runtime font CDN is required. The build includes a printable, searchable handout at `handout/` and `handout/handout.md`.
 
-GitHub CI runs tests and the production build on pushes and pull requests. After Pages is enabled, **Deploy to GitHub Pages** publishes the model and TD3 when their source or build configuration changes on `main`. It can also be triggered manually.
+GitHub CI runs tests and the production build on pushes and pull requests. After Pages is enabled, **Deploy to GitHub Pages** publishes the model, TD3 and TD5 when their source or build configuration changes on `main`. It can also be triggered manually.
+
+## TD5: limits and continuity
+
+The complete correction of the five exercises is in [`presentations/td5-limites`](presentations/td5-limites). Each exercise begins with a course reminder, followed by detailed solutions without l’Hôpital’s rule.
+
+- [Public presentation for students](https://malek452.github.io/atelier-presentations/td5-limites/)
+- [Printable correction](https://malek452.github.io/atelier-presentations/td5-limites/handout/)
+
+The GitHub Pages links are public and require no ChatGPT account. The model, TD3 and TD5 are published under separate paths.
 
 ## Working with an LLM
 

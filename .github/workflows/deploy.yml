@@ -18,6 +18,7 @@ on:
       - "package-lock.json"
       - ".nvmrc"
       - "presentations/td3-fonctions/**"
+      - "presentations/td5-limites/**"
       - ".github/workflows/deploy.yml"
 permissions:
   contents: read
@@ -38,6 +39,7 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             presentations/td3-fonctions/package-lock.json
+            presentations/td5-limites/package-lock.json
       - run: npm ci
       - run: npm run validate
       - name: Install TD3 dependencies
@@ -48,6 +50,14 @@ jobs:
         working-directory: presentations/td3-fonctions
       - name: Add TD3 to the published site
         run: cp -a presentations/td3-fonctions/dist dist/td3-fonctions
+      - name: Install TD5 dependencies
+        run: npm ci
+        working-directory: presentations/td5-limites
+      - name: Validate and build TD5
+        run: npm run validate
+        working-directory: presentations/td5-limites
+      - name: Add TD5 to the published site
+        run: cp -a presentations/td5-limites/dist dist/td5-limites
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

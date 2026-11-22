@@ -1,0 +1,103 @@
+import type { Exercise, Step } from '../types';
+const t = String.raw;
+const s = (title: string, tex: string, why: string, phase?: string): Step => ({ title, tex, why, phase, statement: true });
+
+export default {
+  id: 4,
+  title: 'Exercice 4 · Logarithmes, exponentielles et conjugué',
+  short: 'Exercice 4',
+  theme: 'Lever les formes indéterminées',
+  level: 'Mathématiques 1',
+  minutes: 30,
+  objectives: ['Transformer une différence de logarithmes', 'Utiliser les croissances comparées', 'Rationaliser un numérateur'],
+  prerequisites: ['Logarithme et exponentielle', 'Identités remarquables', 'Règles sur les limites'],
+  description: 'Cinq limites résolues par des identités exactes, la continuité et les propriétés du cours.',
+  color: 'sage',
+  activities: [
+    {
+      id: 'ex4-rappel', label: 'Rappels de cours', visual: 'logs',
+      prompt: 'Quels outils utiliser pour transformer ces expressions ?',
+      tex: t`\ln a-\ln b=\ln\!\left(\frac ab\right)`,
+      result: t`(u-v)(u+v)=u^2-v^2`,
+      note: 'Chapitre 3 : continuité p. 34, quotients et signes p. 37, croissances comparées p. 40.',
+      steps: [
+        s('Réunir les logarithmes', t`\ln a-\ln b=\ln\!\left(\frac ab\right)\quad(a>0,\ b>0)`, 'Les deux arguments doivent être strictement positifs. On transforme une différence en logarithme d’un quotient, puis on étudie ce quotient.', 'Rappels'),
+        s('Extraire une exponentielle d’un logarithme', t`\ln(e^x A)=x+\ln A\quad(A>0)`, 'On utilise le logarithme d’un produit positif et l’identité ln(eˣ) = x.'),
+        s('Croissances comparées à l’infini', t`\lim_{x\to+\infty}\frac{x^n}{e^x}=0\quad(n\in\mathbb N^*)`, 'D’après le cours p. 40, l’exponentielle croît plus vite que toute puissance entière positive. En particulier, x/eˣ tend vers 0.'),
+        s('Croissances comparées près de zéro', t`\lim_{x\to0^+}x^n\ln x=0\quad(n\in\mathbb N^*)`, 'Cette propriété du cours p. 40 lève la forme indéterminée 0 × (−∞). Pour 0 < x < 1, le produit est négatif.'),
+        s('Un dénominateur qui tend vers zéro', t`\frac{a}{0^+}\longrightarrow+\infty,\qquad\frac{a}{0^-}\longrightarrow-\infty\quad(a>0)`, 'Ces notations résument les règles de limites : le signe du dénominateur est indispensable. Elles ne désignent pas une division par zéro.'),
+        s('Utiliser la quantité conjuguée', t`(\sqrt A-B)(\sqrt A+B)=A-B^2\quad(A\geq0)`, 'Si le conjugué est non nul, on peut multiplier le numérateur et le dénominateur par celui-ci. L’identité est exacte et peut faire apparaître un facteur simplifiable.'),
+      ],
+    },
+    {
+      id: 'ex4-a', label: 'a · Logarithme d’une somme', visual: 'logs',
+      prompt: 'Calculer la limite en +∞ de x² / ln(eˣ + 1).',
+      tex: t`\lim_{x\to+\infty}\frac{x^2}{\ln(e^x+1)}`,
+      result: t`+\infty`, initialDomain: t`\mathbb R`,
+      steps: [
+        s('Énoncé et domaine', t`\lim_{x\to+\infty}\frac{x^2}{\ln(e^x+1)}`, 'Pour tout réel x, eˣ + 1 > 1, donc son logarithme est strictement positif. L’expression est définie sur ℝ ; la substitution conduit à ∞/∞.', 'Exercice 4a'),
+        s('Factoriser à l’intérieur du logarithme', t`e^x+1=e^x(1+e^{-x})`, 'Le facteur eˣ est strictement positif. L’écriture fait apparaître un facteur qui tend vers 1.'),
+        s('Transformer le logarithme', t`\ln(e^x+1)=x+\ln(1+e^{-x})`, 'Les deux facteurs étant positifs, le logarithme du produit est la somme des logarithmes.'),
+        s('Isoler la croissance principale', t`\frac{x^2}{\ln(e^x+1)}=\frac{x}{1+\frac{\ln(1+e^{-x})}{x}}\quad(x>0)`, 'On remplace le logarithme par son expression exacte puis on divise le numérateur et le dénominateur par x, non nul.'),
+        s('Calculer le terme correctif', t`\lim_{x\to+\infty}\frac{\ln(1+e^{-x})}{x}=0`, 'e⁻ˣ tend vers 0 ; par continuité de ln en 1, le numérateur tend vers 0. Le dénominateur tend vers +∞.'),
+        s('Conclure', t`\boxed{\lim_{x\to+\infty}\frac{x^2}{\ln(e^x+1)}=+\infty}`, 'Le quotient transformé a un numérateur qui tend vers +∞ et un dénominateur qui tend vers 1 > 0.', 'Conclusion'),
+      ],
+    },
+    {
+      id: 'ex4-b', label: 'b · Différences de logarithmes', visual: 'logs',
+      prompt: 'Étudier en +∞ le quotient de ln(x² + 1) − ln(2x² + 1) par ln(x³ + 1) − ln(x³ − 1).',
+      tex: t`\lim_{x\to+\infty}\frac{\ln(x^2+1)-\ln(2x^2+1)}{\ln(x^3+1)-\ln(x^3-1)}`,
+      result: t`-\infty`, initialDomain: t`]1;+\infty[`,
+      steps: [
+        s('Énoncé', t`\lim_{x\to+\infty}\frac{\ln(x^2+1)-\ln(2x^2+1)}{\ln(x^3+1)-\ln(x^3-1)}`, 'Chaque différence de logarithmes présente d’abord une forme ∞ − ∞. Il faut transformer les différences avant de passer à la limite.', 'Exercice 4b'),
+        s('Vérifier le domaine', t`D=]1;+\infty[`, 'Il faut x³ − 1 > 0, soit x > 1 ; les autres arguments sont alors positifs. De plus, ln(x³ + 1) > ln(x³ − 1), donc le dénominateur est strictement positif.'),
+        s('Transformer le numérateur', t`\ln(x^2+1)-\ln(2x^2+1)=\ln\!\left(\frac{1+1/x^2}{2+1/x^2}\right)`, 'On réunit les logarithmes, puis on divise le quotient intérieur par x² > 0.'),
+        s('Limite du numérateur', t`\lim_{x\to+\infty}\bigl(\ln(x^2+1)-\ln(2x^2+1)\bigr)=-\ln2<0`, 'Le quotient intérieur tend vers 1/2. Le logarithme est continu en 1/2 et ln(1/2) = −ln 2.'),
+        s('Transformer le dénominateur', t`\ln(x^3+1)-\ln(x^3-1)=\ln\!\left(1+\frac{2}{x^3-1}\right)`, 'On réunit les logarithmes et on écrit x³ + 1 = (x³ − 1) + 2.'),
+        s('Repérer le côté d’approche de zéro', t`\ln\!\left(1+\frac{2}{x^3-1}\right)\longrightarrow0^+`, 'Pour x > 1, l’argument est strictement supérieur à 1 et tend vers 1. Son logarithme est donc positif et tend vers 0.'),
+        s('Conclure avec le signe', t`\boxed{\lim_{x\to+\infty}\frac{\ln(x^2+1)-\ln(2x^2+1)}{\ln(x^3+1)-\ln(x^3-1)}=-\infty}`, 'Un numérateur qui tend vers le réel strictement négatif −ln 2, divisé par un dénominateur qui tend vers 0 par valeurs positives, donne −∞.', 'Conclusion'),
+      ],
+    },
+    {
+      id: 'ex4-c', label: 'c · Croissance comparée près de zéro', visual: 'logs',
+      prompt: 'Calculer la limite en 0⁺ de (x + 2) / (x² ln x).',
+      tex: t`\lim_{x\to0^+}\frac{x+2}{x^2\ln x}`,
+      result: t`-\infty`, initialDomain: t`]0;1[\cup]1;+\infty[`,
+      steps: [
+        s('Énoncé et domaine', t`\lim_{x\to0^+}\frac{x+2}{x^2\ln x}`, 'Le logarithme exige x > 0 et le dénominateur ne doit pas s’annuler : x ≠ 1. Près de 0, on se place dans ]0 ; 1[.', 'Exercice 4c'),
+        s('Traiter le produit indéterminé', t`\lim_{x\to0^+}x^2\ln x=0`, 'Le produit 0 × (−∞) ne suffit pas pour conclure. On applique la propriété de croissance comparée du cours p. 40 avec n = 2.'),
+        s('Déterminer le signe du dénominateur', t`0<x<1\quad\Longrightarrow\quad x^2>0,\quad\ln x<0`, 'Le produit x² ln x est négatif sur tout ]0 ; 1[ : sa limite est donc 0 par valeurs négatives.'),
+        s('Assembler les limites', t`x+2\longrightarrow2>0,\qquad x^2\ln x\longrightarrow0^-`, 'Le numérateur tend vers un réel strictement positif ; le dénominateur tend vers zéro en restant négatif.'),
+        s('Conclure', t`\boxed{\lim_{x\to0^+}\frac{x+2}{x^2\ln x}=-\infty}`, 'La règle du quotient avec un dénominateur tendant vers 0⁻ donne une limite égale à −∞.', 'Conclusion'),
+      ],
+    },
+    {
+      id: 'ex4-d', label: 'd · Exponentielles dominantes', visual: 'logs',
+      prompt: 'Calculer la limite en +∞ de (e³ˣ + 2x + 7) / (eˣ + e⁻ˣ).',
+      tex: t`\lim_{x\to+\infty}\frac{e^{3x}+2x+7}{e^x+e^{-x}}`,
+      result: t`+\infty`, initialDomain: t`\mathbb R`,
+      steps: [
+        s('Énoncé et domaine', t`\lim_{x\to+\infty}\frac{e^{3x}+2x+7}{e^x+e^{-x}}`, 'Les exponentielles sont définies et strictement positives pour tout réel x. Le dénominateur ne s’annule jamais ; la forme initiale est ∞/∞.', 'Exercice 4d'),
+        s('Diviser par eˣ', t`\frac{e^{3x}+2x+7}{e^x+e^{-x}}=\frac{e^{2x}+2xe^{-x}+7e^{-x}}{1+e^{-2x}}`, 'On divise tous les termes par eˣ > 0. Les quotients d’exponentielles se simplifient en soustrayant les exposants.'),
+        s('Les termes secondaires tendent vers zéro', t`2xe^{-x}\longrightarrow0,\qquad7e^{-x}\longrightarrow0,\qquad e^{-2x}\longrightarrow0`, 'La croissance comparée x/eˣ → 0 donne la première limite. Les deux autres suivent de e⁻ˣ → 0 et e⁻²ˣ → 0.'),
+        s('Le terme dominant tend vers l’infini', t`e^{2x}+2xe^{-x}+7e^{-x}\longrightarrow+\infty`, 'Le premier terme tend vers +∞, tandis que les deux autres tendent vers 0. Le dénominateur transformé tend vers 1.'),
+        s('Conclure', t`\boxed{\lim_{x\to+\infty}\frac{e^{3x}+2x+7}{e^x+e^{-x}}=+\infty}`, 'Le numérateur transformé tend vers +∞ et son dénominateur vers 1 > 0.', 'Conclusion'),
+      ],
+    },
+    {
+      id: 'ex4-e', label: 'e · Un conjugué bien choisi', visual: 'algebra',
+      prompt: 'Calculer la limite en 0 de [√(1 + x) − (1 + x/2)] / x².',
+      tex: t`\lim_{x\to0}\frac{\sqrt{1+x}-(1+x/2)}{x^2}`,
+      result: t`-\frac18`, initialDomain: t`[-1;0[\cup]0;+\infty[`,
+      steps: [
+        s('Énoncé et domaine', t`\lim_{x\to0}\frac{\sqrt{1+x}-(1+x/2)}{x^2}`, 'Il faut x ≥ −1 et x ≠ 0. L’expression est définie des deux côtés de 0 et donne une forme 0/0.', 'Exercice 4e'),
+        s('Choisir le conjugué du numérateur entier', t`C(x)=\sqrt{1+x}+1+\frac x2`, 'On considère √(1 + x) − (1 + x/2) comme une différence de deux blocs. Pour x ≥ −1, 1 + x/2 ≥ 1/2, donc le conjugué C(x) est strictement positif.', 'Quantité conjuguée'),
+        s('Appliquer la différence de deux carrés', t`\bigl(\sqrt{1+x}-(1+x/2)\bigr)C(x)=(1+x)-(1+x/2)^2`, 'L’identité (a − b)(a + b) = a² − b² élimine la racine carrée. Le carré du second bloc porte sur toute la parenthèse.'),
+        s('Regrouper le calcul algébrique', t`(1+x)-(1+x/2)^2=-\frac{x^2}{4}`, 'Le carré vaut 1 + x + x²/4. Les termes 1 et x s’annulent exactement ; il reste −x²/4.'),
+        s('Simplifier pour x différent de zéro', t`\frac{\sqrt{1+x}-(1+x/2)}{x^2}=-\frac{1}{4\bigl(\sqrt{1+x}+1+x/2\bigr)}`, 'Après multiplication par C(x)/C(x), le facteur x² est commun au numérateur et au dénominateur. Il est non nul sur le domaine étudié et se simplifie.', 'Lever l’indétermination'),
+        s('Passer à la limite dans le conjugué', t`\lim_{x\to0}\left(\sqrt{1+x}+1+\frac x2\right)=2`, 'La racine est continue en 1. Le nouveau dénominateur tend donc vers 4 × 2 = 8, qui est non nul.'),
+        s('Conclure des deux côtés', t`\boxed{\lim_{x\to0}\frac{\sqrt{1+x}-(1+x/2)}{x^2}=-\frac18}`, 'L’identité simplifiée est valable à gauche et à droite de 0. La continuité permet de calculer la même limite des deux côtés.', 'Conclusion'),
+      ],
+    },
+  ],
+} satisfies Exercise;

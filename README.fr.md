@@ -62,4 +62,11 @@ Une présentation complète et indépendante se trouve dans [`presentations/td3-
 - [Présentation pour les étudiants](https://malek452.github.io/atelier-presentations/td3-fonctions/)
 - [Corrigé imprimable](https://malek452.github.io/atelier-presentations/td3-fonctions/handout/)
 
-Le workflow Pages valide et publie le modèle et le TD 3 dans deux chemins distincts.
+## TD 5 : limites et continuité
+
+Le corrigé complet des cinq exercices se trouve dans [`presentations/td5-limites`](presentations/td5-limites). Chaque exercice commence par un rappel de cours, puis propose une solution détaillée sans règle de l’Hôpital.
+
+- [Présentation publique pour les étudiants](https://malek452.github.io/atelier-presentations/td5-limites/)
+- [Corrigé imprimable](https://malek452.github.io/atelier-presentations/td5-limites/handout/)
+
+Les liens GitHub Pages sont publics et ne demandent aucun compte ChatGPT. Le workflow Pages valide et publie le modèle, le TD 3 et le TD 5 dans trois chemins distincts.
