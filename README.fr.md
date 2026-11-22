@@ -1,6 +1,6 @@
 # Atelier Présentations
 
-Un modèle réutilisable issu d’[Atelier Fonctions](https://github.com/Malek452/atelier-fonctions) : un tableau vert sombre, des formules lisibles et des animations qui expliquent chaque transformation. L’étudiant consulte une présentation pas à pas, sans compte ni saisie de réponses.
+Un modèle réutilisable issu d’[Atelier Fonctions](https://github.com/Malek452/atelier-fonctions) : le thème clair à fort contraste du TD3, avec un tableau ivoire, du texte bleu foncé, des formules lisibles et des animations qui expliquent chaque transformation. L’étudiant consulte une présentation pas à pas, sans compte ni saisie de réponses.
 
 [Présentation de démonstration](https://malek452.github.io/atelier-presentations/) · [English](README.md) · [Guide de rédaction](docs/AUTHORING.md) · [Recettes d’animation](docs/ANIMATIONS.md)
 

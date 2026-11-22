@@ -1,10 +1,8 @@
 # Atelier Presentations
 
-A reusable presentation starter extracted from [Atelier Fonctions](https://github.com/Malek452/atelier-fonctions). It keeps the dark green board, readable mathematics, and deliberate animations from that project. Students move through an explanation; there are no accounts, quizzes, answer fields, or grading services.
+A reusable presentation starter extracted from [Atelier Fonctions](https://github.com/Malek452/atelier-fonctions). It uses the light, high-contrast theme from the TD3 presentation: an ivory board, dark blue text, readable mathematics, and deliberate animations. Students move through an explanation; there are no accounts, quizzes, answer fields, or grading services.
 
 [Live example presentation](https://malek452.github.io/atelier-presentations/) · [Version française](README.fr.md) · [Authoring guide](docs/AUTHORING.md) · [Animation recipes](docs/ANIMATIONS.md) · [Instructions for coding assistants](AGENTS.md)
-
-![The presentation board showing a French sign table and its explanation](docs/preview.jpg)
 
 ## Start your own presentation
 
@@ -67,7 +65,7 @@ npm run validate
 
 Deploy **`dist/`** to a static host. [Deployment instructions](docs/DEPLOYMENT.md) cover GitHub Pages and Netlify. No backend, API key, paid correction service or runtime font CDN is required. The build includes a printable, searchable handout at `handout/` and `handout/handout.md`.
 
-GitHub CI runs tests and the production build on pushes and pull requests. A separate, manually triggered **Deploy to GitHub Pages** workflow publishes the presentation after Pages is enabled. The template does not automatically deploy each push.
+GitHub CI runs tests and the production build on pushes and pull requests. After Pages is enabled, **Deploy to GitHub Pages** publishes the model and TD3 when their source or build configuration changes on `main`. It can also be triggered manually.
 
 ## Working with an LLM
 

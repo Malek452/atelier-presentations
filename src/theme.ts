@@ -1,19 +1,19 @@
 /** Preserve semantic color roles when customizing this palette.
  * The same values feed React/CSS, KaTeX highlights and Motion Canvas. */
 export const theme = {
-  board: '#182923',
-  panel: '#233a2f',
-  controls: '#20372b',
-  line: '#3b5143',
-  text: '#eef2e9',
-  explanation: '#e3e9de',
-  muted: '#b4c3b3',
-  controlAccent: '#e7c484',
-  mathInk: '#f1f2e9',
-  active: '#edc57e',
-  second: '#a9cfe8',
-  base: '#b8d6ba',
-  fallbackActive: '#e4bb78',
+  board: '#fffefa',
+  panel: '#f2f5f8',
+  controls: '#edf1f5',
+  line: '#8b99aa',
+  text: '#14263d',
+  explanation: '#26364b',
+  muted: '#465b72',
+  controlAccent: '#064f89',
+  mathInk: '#14263d',
+  active: '#9b330e',
+  second: '#07589f',
+  base: '#146341',
+  fallbackActive: '#9b330e',
 };
 
 export function applyTheme() {

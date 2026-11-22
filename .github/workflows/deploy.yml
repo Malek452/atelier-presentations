@@ -4,6 +4,19 @@ on:
   push:
     branches: [main]
     paths:
+      - "src/**"
+      - "examples/**"
+      - "motion/**"
+      - "scripts/**"
+      - "tests/**"
+      - "public/**"
+      - "index.html"
+      - "presentation.config.ts"
+      - "vite.config.ts"
+      - "tsconfig.json"
+      - "package.json"
+      - "package-lock.json"
+      - ".nvmrc"
       - "presentations/td3-fonctions/**"
       - ".github/workflows/deploy.yml"
 permissions:

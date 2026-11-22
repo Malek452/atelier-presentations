@@ -11,14 +11,7 @@ The deliverable is the complete **`dist/` directory** produced by `npm run build
 
 The workflow needs the built-in `GITHUB_TOKEN` only; no personal token or repository secret is required. Public repositories can use the ordinary free Pages offering. Repository or organization policies may impose an environment approval; follow the policy shown by GitHub.
 
-The provided CI workflow runs on pushes/PRs. Deployment is deliberately manual so that a freshly copied template can pass CI before Pages is configured. To publish every `main` push after enabling Pages, add a `push` trigger to `.github/workflows/deploy.yml`:
-
-```yaml
-on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-```
+The provided CI workflow runs on pushes/PRs. The deployment workflow publishes both the model and TD3 when their source or build configuration changes on `main`; it also supports manual dispatch. For a freshly copied template, configure Pages before publishing. Remove the `push` trigger from `.github/workflows/deploy.yml` if you prefer manual publication only.
 
 Vite uses relative asset URLs (`base: './'`), so a project URL such as `https://USERNAME.github.io/REPOSITORY/` works without hard-coding a username. Activity navigation uses hashes; no SPA route rewrites are necessary.
 

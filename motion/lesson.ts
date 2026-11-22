@@ -56,7 +56,7 @@ export default makeScene2D(function* (view) {
           height: 255,
           x: -90,
           y: -10,
-          fill: '#284238',
+          fill: theme.panel,
           stroke: blue,
           lineWidth: 2,
         }),
@@ -103,13 +103,13 @@ export default makeScene2D(function* (view) {
         ? cx + R * Math.cos(step.circle.angle)
         : -R * Math.sin(step.circle.angle);
       diagramNodes.push(
-        new Circle({ x: cx, size: R * 2, stroke: '#718977', lineWidth: 2 }),
+        new Circle({ x: cx, size: R * 2, stroke: theme.muted, lineWidth: 2 }),
         new Line({
           points: [
             [cx - 150, 0],
             [cx + 150, 0],
           ],
-          stroke: '#718977',
+          stroke: theme.muted,
           lineWidth: 1,
           endArrow: true,
         }),
@@ -118,7 +118,7 @@ export default makeScene2D(function* (view) {
             [cx, 145],
             [cx, -145],
           ],
-          stroke: '#718977',
+          stroke: theme.muted,
           lineWidth: 1,
           endArrow: true,
         }),
@@ -180,7 +180,7 @@ export default makeScene2D(function* (view) {
         height: 255,
         x: 90,
         y: -10,
-        fill: '#537463',
+        fill: theme.controls,
         stroke: gold,
         lineWidth: 2,
       });
